@@ -16,8 +16,8 @@ public class ClienteController {
     @Autowired
     ClienteRepository clienteRepository;
 
-    // Create, Read, Update, Delete
-    // Post, Get, Put, Delete
+    // Create, Read, Update, Delete - Cr
+    // Post, Get, Put, Delete - Verbos
 
     @PostMapping
     public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) {
