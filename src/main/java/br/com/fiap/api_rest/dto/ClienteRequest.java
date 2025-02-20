@@ -1,7 +1,6 @@
 package br.com.fiap.api_rest.dto;
 
 public class ClienteRequest {
-
     private String nome;
     private int idade;
 
@@ -20,6 +19,4 @@ public class ClienteRequest {
     public void setIdade(int idade) {
         this.idade = idade;
     }
-
-    //Record classe que grava dados
 }
