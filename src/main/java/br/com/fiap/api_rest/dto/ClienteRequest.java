@@ -1,22 +1,34 @@
 package br.com.fiap.api_rest.dto;
 
+import br.com.fiap.api_rest.model.Categoria;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
+
+@Data
+@AllArgsConstructor
+
 public class ClienteRequest {
+
+    @NotBlank(message = "O nome é obrigatório")
+    @Size(min = 3,max = 150, message = "O nome deve ter entre 3 e 150 caracteres")
     private String nome;
+
+    @Min(value = 18, message = "O cliente deve ter no mínimo 18 anos")
     private int idade;
 
-    public String getNome() {
-        return nome;
-    }
+    @Email(message = "Email fora do formato correto")
+    private String email;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*]).{8,}",
+            message = "A senha deve conter pelo menos 8 caracteres, incluindo pelo menos uma " +
+                    "letra maiúscula, uma letra minúscula, um número e um caractere especial.")
+    private String senha;
 
-    public int getIdade() {
-        return idade;
-    }
+    @CPF(message = "CPF fora do formato correto")
+    private String cpf;
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
+    @NotNull(message = "A categoria é obrigatória")
+    private Categoria categoria;
 }
