@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
     public Cliente requestToCliente(ClienteRequest clienteRequest) {
-        return new Cliente(null, clienteRequest.getNome(),
+        return new Cliente(null,
+                clienteRequest.getNome(),
                 clienteRequest.getIdade(),
                 clienteRequest.getEmail(),
                 clienteRequest.getSenha(),
