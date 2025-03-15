@@ -5,8 +5,6 @@ import br.com.fiap.api_rest.dto.ClienteRequest;
 import br.com.fiap.api_rest.dto.ClienteResponse;
 import br.com.fiap.api_rest.model.Cliente;
 import br.com.fiap.api_rest.repository.ClienteRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.Link;
@@ -25,8 +23,8 @@ public class ClienteService {
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
     }
-//@Autowired
-
+//    @Autowired
+//    ClienteRepository clienteRepository;
 
     public Cliente requestToCliente(ClienteRequest clienteRequest) {
         return new Cliente(null,
@@ -51,10 +49,11 @@ public class ClienteService {
                     methodOn(
                             ClienteController.class
                     ).readClientes(0)
-            ).withRel("Lista de CLiente");
+            ).withRel("Lista de Clientes");
         }
         return new ClienteResponse(cliente.getId(), cliente.getNome(), link);
     }
+
     public List<ClienteResponse> clientesToResponse(List<Cliente> clientes) {
         List<ClienteResponse> clientesResponse = new ArrayList<>();
         for (Cliente cliente : clientes) {
@@ -67,7 +66,8 @@ public class ClienteService {
     public Page<ClienteResponse> findAll(Pageable pageable) {
         // busca os clientes de acordo com a configuração do pageable,
         // converte para response e retorna como um Page<ClienteResponse>
-        return clienteRepository.findAll(pageable).map(cliente -> clienteToResponse(cliente, true));
-
+        return clienteRepository.findAll(pageable)
+                .map(cliente -> clienteToResponse(cliente, true));
+        //return clienteRepository.findAll(pageable).map(this::clienteToResponse);
     }
 }
