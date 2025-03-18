@@ -1,10 +1,7 @@
 package br.com.fiap.api_rest.model;
 
 import br.com.fiap.api_rest.enums.Categoria;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -20,7 +17,16 @@ public class Cliente {
     private String senha;
     private String cpf;
     private Categoria categoria;
-    private boolean vip;
+
+    @ManyToMany
+    @JoinColumn(name = "id_filial")
+    private Filial filial;
+
+    @ManyToMany
+    @JoinTable(name = "grupo_cliente",
+    joinColumns = @JoinColumn(name = "id_gruppo", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "id_cliente", referencedColumnName = "id"))
+    private Grupo grupo;
 
     public Cliente() {
     }
@@ -33,14 +39,6 @@ public class Cliente {
         this.senha = senha;
         this.cpf = cpf;
         this.categoria = categoria;
-    }
-
-    public boolean isVip() {
-        return vip;
-    }
-
-    public void setVip(boolean vip) {
-        this.vip = vip;
     }
 
     public Date getDataNascimento() {
