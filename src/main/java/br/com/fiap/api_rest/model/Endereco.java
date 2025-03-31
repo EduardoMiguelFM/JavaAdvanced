@@ -6,16 +6,16 @@ import jakarta.persistence.*;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String localizacao;
-    @OneToOne(mappedBy = "endereco", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "endereco")
     private Filial filial;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
